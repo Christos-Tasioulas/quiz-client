@@ -1,0 +1,80 @@
+.users {
+    margin: 0 auto;
+    margin-top: 10%;
+    padding: 2rem;
+    max-width: 1000px;
+    background-color: var(--button-background-color);
+    border-radius: 1rem;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
+
+.users h1 {
+    text-align: center;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+}
+
+.scroll-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--button-border-color);
+    border-radius: 8px;
+    background-color: var(--background-color);
+}
+
+table.scroll {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+table.scroll td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+table.scroll th,
+table.scroll td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-text-less-saturated);
+    color: var(--color-text);
+}
+
+table.scroll th {
+    background-color: var(--secondary-background);
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+table.scroll tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.DARK table.scroll th {
+    background-color: var(--link-hover-color);
+}
+
+body.DARK table.scroll tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.user-table-row {
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.user-table-row:hover {
+    background-color: var(--secondary-background);
+    color: #fff;
+    transform: scale(1.01);
+}
+
+body.DARK .user-table-row:hover {
+    background-color: var(--link-hover-color);
+    color: #fff;
+}
+

@@ -1,0 +1,19 @@
+.footer {
+    background-color: var(--secondary-background);
+    font-size: small;
+    padding: 2rem;
+}
+
+.footer a {
+    color: var(--color-text);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.logo-github {
+    margin-top: auto;
+    margin-bottom: auto;
+    height: 25px;
+    width: 25px;
+}

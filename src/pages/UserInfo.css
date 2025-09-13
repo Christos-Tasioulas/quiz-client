@@ -1,0 +1,78 @@
+.userinfo-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: var(--button-background-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--color-text);
+}
+
+.user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.userInfo {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.fullname {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.-username {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--color-text-less-saturated);
+}
+
+.role {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--link-color);
+}
+
+.contacts {
+    margin-top: 2rem;
+}
+
+.contacts-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+}
+
+/* Delete Button */
+.delete-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--secondary-background);
+    border-radius: 8px;
+    color: #fff;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.delete-button:hover {
+    background-color: var(--link-hover-color);
+}
+
+.delete-favicon {
+    width: 20px;
+    height: 20px;
+}

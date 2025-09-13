@@ -1,0 +1,33 @@
+/* Header.css */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--background-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Optional: make the button look nicer */
+.header button {
+    border: transparent;
+    background-color: transparent;
+    color: var(--color-text);
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.header button:hover {
+    background-color: var(--link-hover-color);
+    color: #fff;
+}
+
+.header button:focus,
+.header button:focus-visible {
+    outline: none;
+    border-color: var(--link-hover-color); /* or whatever you want on focus */
+}
+

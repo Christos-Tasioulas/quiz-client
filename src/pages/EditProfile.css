@@ -1,0 +1,103 @@
+.edit-profile-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--secondary-background);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.edit-profile {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.edit-profile a{
+    color: var(--color-text-less-saturated)
+}
+
+.edit-profile a:hover{
+    color: var(--color-text)
+}
+
+.edit-profile h1 {
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.text-inputs,
+.other-inputs {
+    flex: 1;
+    row-gap: normal;
+    width: 70%;
+}
+
+.preferences {
+    background-color: var(--button-background-color);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.preferences-title {
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+}
+
+.theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.theme-toggle input[type="radio"] {
+    margin-right: 0.4rem;
+}
+
+.form-submit {
+    align-self: center;
+    background-color: var(--background-color);
+    color: var(--color-text);
+}
+
+.message {
+    color: red;
+    font-weight: bold;
+}
+
+.form-input {
+    width: 90%;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    border: 1px solid var(--button-border-color);
+    border-radius: 8px;
+    background-color: var(--placeholder-color);
+    color: var(--color-text);
+    transition: border-color 0.25s;
+}
+
+.form-input:focus {
+    border-color: var(--link-color);
+    outline: none;
+}
+
+.form-input::placeholder {
+    color: var(--color-text-less-saturated);
+}
+
+.form-inputs {
+    width: 100%;
+    margin-right: 5%;
+}
+
+.form-text-inputs {
+    width: 100%;
+}
