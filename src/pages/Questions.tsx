@@ -21,7 +21,7 @@ export default function Questions(props: { token: string; }) {
                 const questionsResponse = await fetchQuestions();
                 setQuestions(questionsResponse);
             } catch (error) {
-                console.error("Failed to fetch user data:", error);
+                console.error("Failed to fetch question data:", error);
             }
         };
 

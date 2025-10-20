@@ -7,5 +7,5 @@ export interface Answer {
 export interface Question {
     id?: number;
     question: string;
-    answers: Answer[];
+    answers: string[];
 }

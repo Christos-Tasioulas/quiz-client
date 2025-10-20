@@ -22,17 +22,17 @@ export const fetchRandomQuestion = async() => {
     return response.data;
 }
 
-export const fetchAnswersByQuestion = async(id: string) => {
+export const fetchAnswersByQuestion = async(id: string | undefined) => {
     const response = await api.get(`/questions/${id}/answers`);
     return response.data
 }
 
-export const updateQuestion  = async(id: string) => {
-    const response = await api.put(`/questions/${id}`);
+export const updateQuestion  = async(id: string | undefined, questionData: Partial<Question>) => {
+    const response = await api.put(`/questions/${id}`, questionData);
     return response.data;
 }
 
-export const deleteQuestion  = async(id: string) => {
+export const deleteQuestion  = async(id: string | undefined) => {
     const response = await api.delete(`/questions/${id}`);
     return response.data;
 }
