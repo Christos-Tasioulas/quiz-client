@@ -16,6 +16,7 @@ import Users from "./pages/Users.tsx";
 import UserInfo from "./pages/UserInfo.tsx";
 import {fetchCurrentUser} from "./services/user-api.tsx";
 import type {User} from "./types/BasicTypes.tsx";
+import Questions from "./pages/Questions.tsx";
 
 
 function App() {
@@ -77,6 +78,7 @@ function App() {
                         <Route path="/logout" element={<Logout />}/>
                         <Route path="/users" element={<Users token={token || ""} />}/>
                         <Route path="/userinfo/:id" element={<UserInfo token={token || ""} />}/>
+                        <Route path="/questions" element={<Questions token={token || ""}/>}/>
                     </Routes>
                 </div>
                 <Footer/>
