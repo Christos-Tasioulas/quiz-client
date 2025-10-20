@@ -7,8 +7,8 @@ export default defineConfig({
     plugins: [react()],
     server: {
         https: {
-            key: fs.readFileSync('./decrypted-key.pem'), // Path to your private key file
-            cert: fs.readFileSync('./cert.pem'), // Path to your certificate file
+            key: fs.readFileSync('./localhost.key'),
+            cert: fs.readFileSync('./localhost.crt'), // Path to your certificate file
         },
-    },
+    }
 });
