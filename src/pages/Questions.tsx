@@ -53,6 +53,7 @@ export default function Questions(props: { token: string; }) {
                     <tr>
                         <th>Question</th>
                     </tr>
+                    {/*TODO: Implement Add Question Function*/}
                     </thead>
                     <tbody className='scroll-body'>
                     {questionElements}
