@@ -55,24 +55,4 @@
     color: var(--color-text);
 }
 
-/* Delete Button */
-.delete-button {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background-color: var(--secondary-background);
-    border-radius: 8px;
-    color: #fff;
-    font-weight: 500;
-    transition: background-color 0.2s ease;
-}
 
-.delete-button:hover {
-    background-color: var(--link-hover-color);
-}
-
-.delete-favicon {
-    width: 20px;
-    height: 20px;
-}

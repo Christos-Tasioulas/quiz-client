@@ -7,6 +7,7 @@ import deleteDark from "../assets/bin-shapes-and-symbols-svgrepo-com.svg";
 import deleteLight from "../assets/bin-shapes-and-symbols-svgrepo-com-light.svg";
 import './UserInfo.css'
 import Modal from "../components/Modal.tsx";
+import EntityMenu from "../components/EntityMenu.tsx";
 
 export default function UserInfo(props: { token: string; }) {
 
@@ -85,23 +86,22 @@ export default function UserInfo(props: { token: string; }) {
         setIsModalOpen(false);  // Close the modal if the user cancels
     };
 
+    const menuOptions = [
+        {
+            key: 1,
+            image: theme == "LIGHT" ? deleteLight : deleteDark,
+            alt: "Delete Question",
+            text: "Delete Question",
+            onClick: handleDelete
+        }
+    ]
+
     return (
         <main className="userinfo-container">
             <div className="user-info">
                 <div className="user">
                     {/* Delete Profile Button */}
-                    <button onClick={handleDelete} style={{position: "relative", left: "75%", border: "none"}}>
-                        <div className="delete">
-                            <div className="delete-button">
-                                <div className="delete-cog">
-                                    <img
-                                        src={theme == "LIGHT" ? deleteLight : deleteDark}
-                                        alt="Delete User" className="delete-favicon"/>
-                                </div>
-                                <span>Delete Account</span>
-                            </div>
-                        </div>
-                    </button>
+                    <EntityMenu menuOptions={menuOptions}/>
                     <div className="userInfo">
                         {/* Important User Info */}
                         <h2 className='fullname'>{user.firstName} {user.lastName}</h2>

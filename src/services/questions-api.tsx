@@ -1,5 +1,5 @@
 import api from './axiosInstance';
-import type {Question} from "../types/Question.tsx";
+import type {Question, QuestionRequest} from "../types/Question.tsx";
 
 // API Methods
 export const createQuestion = async(questionData: Question) => {
@@ -27,7 +27,7 @@ export const fetchAnswersByQuestion = async(id: string | undefined) => {
     return response.data
 }
 
-export const updateQuestion  = async(id: string | undefined, questionData: Partial<Question>) => {
+export const updateQuestion  = async(id: string | undefined, questionData: Partial<QuestionRequest>) => {
     const response = await api.put(`/questions/${id}`, questionData);
     return response.data;
 }

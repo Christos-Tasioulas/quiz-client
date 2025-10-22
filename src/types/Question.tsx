@@ -9,3 +9,9 @@ export interface Question {
     question: string;
     answers: string[];
 }
+
+export interface QuestionRequest {
+    id?: number;
+    question: string;
+    answers: Answer[];
+}
