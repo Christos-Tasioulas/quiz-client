@@ -2,9 +2,8 @@ import {useContext, useEffect} from "react";
 import {ThemeContext} from "../context/ThemeContext.tsx";
 import NavBar from "./NavBar.tsx";
 import "./Header.css";
-import LightThemeSVG from "../assets/LightThemeSVG.tsx";
-import DarkThemeSVG from "../assets/DarkThemeSVG.tsx";
 import type {Theme} from "../types/BasicTypes.tsx";
+import {Moon, Sun} from "lucide-react";
 
 interface HeaderProps {
     token?: string | null
@@ -30,7 +29,7 @@ export default function Header({token, preferredTheme}: HeaderProps) {
         <header className="header">
             <NavBar token={token}/>
             <button onClick={toggleTheme}>
-                {theme === "LIGHT" ? <DarkThemeSVG/> : <LightThemeSVG/>}
+                {theme === "LIGHT" ? <Moon /> : <Sun />}
             </button>
         </header>
     )

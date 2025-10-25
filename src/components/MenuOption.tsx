@@ -1,9 +1,9 @@
 import './MenuOption.css'
+import React from "react";
 
 export interface MenuOptionProps {
     key: number;
-    image: string;
-    alt: string;
+    Icon: React.FC<React.SVGProps<SVGSVGElement>>;
     text: string;
     onClick?: () => void;
 }
@@ -15,9 +15,7 @@ export default function MenuOption(props: MenuOptionProps) {
             <div className="menu-option">
                 <div className="menu-button">
                     <div className="menu-favicon-container">
-                        <img
-                            src={props.image}
-                            alt={props.alt} className="menu-favicon"/>
+                        <props.Icon />
                     </div>
                     <span>{props.text}</span>
                 </div>

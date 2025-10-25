@@ -1,12 +1,8 @@
-import {type ChangeEvent, useContext, useEffect, useState} from "react";
+import {type ChangeEvent, useEffect, useState} from "react";
 import type {User} from "../types/BasicTypes.tsx";
-import {ThemeContext} from "../context/ThemeContext.tsx";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {fetchCurrentUser} from "../services/user-api.tsx";
 import {deleteQuestion, fetchQuestionById, updateQuestion} from "../services/questions-api.tsx";
-import deleteLight from "../assets/bin-shapes-and-symbols-svgrepo-com-light.svg";
-import deleteDark from "../assets/bin-shapes-and-symbols-svgrepo-com.svg";
-import edit from "../assets/edit.png";
 import Modal from "../components/Modal.tsx";
 import type {Question} from "../types/Question.tsx";
 import FormInputs from "../components/FormInputs.tsx";
@@ -14,13 +10,13 @@ import EntityMenu from "../components/EntityMenu.tsx";
 import './QuestionInfo.css';
 import DynamicFormInputs from "../components/DynamicFormInputs.tsx";
 import ErrorMessage from "../components/ErrorMessage.tsx";
+import {Pencil, Trash} from "lucide-react";
 
 export default function QuestionInfo(props: { token: string; }) {
 
     const [currentUser, setCurrentUser] = useState<User>({} as User);
     const [question, setQuestion] = useState<Question>({} as Question);
     const [answers, setAnswers] = useState<string[]>([]);
-    const {theme} = useContext(ThemeContext);
     const {id} = useParams()
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
@@ -165,11 +161,10 @@ export default function QuestionInfo(props: { token: string; }) {
     };
 
     const menuOptions = [
-        {key: 1, image: edit, alt: "Edit Question", text: "Edit Question", onClick: handleEditClick},
+        {key: 1, Icon: Pencil, text: "Edit Question", onClick: handleEditClick},
         {
             key: 2,
-            image: theme == "LIGHT" ? deleteLight : deleteDark,
-            alt: "Delete Question",
+            Icon: Trash,
             text: "Delete Question",
             onClick: handleDelete
         }

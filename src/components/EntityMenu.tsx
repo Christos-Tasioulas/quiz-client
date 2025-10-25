@@ -10,8 +10,7 @@ export default function EntityMenu(props:EntityMenuProps) {
     const menuElements = props.menuOptions.map(menuOption => (
             <MenuOption
                 key={menuOption.key}
-                image={menuOption.image}
-                alt={menuOption.alt}
+                Icon={menuOption.Icon}
                 text={menuOption.text}
                 onClick={menuOption.onClick}
             />

@@ -3,7 +3,8 @@ import {useEffect, useState} from "react";
 import type {User} from "../types/BasicTypes.tsx";
 import {fetchCurrentUser} from "../services/user-api.tsx";
 import './Profile.css'
-import gearIcon from "../assets/Gear_icon-72a7cf.svg"
+// import gearIcon from "../assets/Gear_icon-72a7cf.svg"
+import {Mail, Pencil} from "lucide-react";
 
 export default function Profile(props: { token: string; }) {
 
@@ -27,13 +28,13 @@ export default function Profile(props: { token: string; }) {
 
     // All the favicons shown in the contact section of the user profile
     const contacts = [
-        {id:1, favicon: 'https://cdn3.iconfinder.com/data/icons/social-messaging-ui-color-line/245532/72-512.png', alt:"email", name: currentUser.email},
+        {id:1, Icon: Mail, name: currentUser.email},
     ]
 
     // User contact information as html elements
     const contactElements = contacts.map(contact =>
         <div key={contact.id} className='profile-contact'>
-            <img src={contact.favicon} alt={contact.alt} />
+            <contact.Icon size={20}/>
             <h3>{contact.name}</h3>
         </div>
     )
@@ -46,11 +47,7 @@ export default function Profile(props: { token: string; }) {
                     <Link to='/editprofile' style={{position: "relative", left: "35%"}}>
                         <div className="edit">
                             <div className="edit-button">
-                                <div className="edit-cog">
-                                    <img
-                                        src={gearIcon}
-                                        alt="Edit-profile" className="edit-favicon"/>
-                                </div>
+                                <Pencil size={18} />
                                 <span>Edit Account</span>
                             </div>
                         </div>

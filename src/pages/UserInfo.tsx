@@ -1,21 +1,18 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import type {User} from "../types/BasicTypes.tsx";
 import {deleteUser, fetchCurrentUser, fetchUserById} from "../services/user-api.tsx";
-import {ThemeContext} from "../context/ThemeContext.tsx";
-import deleteDark from "../assets/bin-shapes-and-symbols-svgrepo-com.svg";
-import deleteLight from "../assets/bin-shapes-and-symbols-svgrepo-com-light.svg";
 import './UserInfo.css'
 import Modal from "../components/Modal.tsx";
 import EntityMenu from "../components/EntityMenu.tsx";
+import {Trash} from "lucide-react";
 
 export default function UserInfo(props: { token: string; }) {
 
     const [currentUser, setCurrentUser] = useState<User>({} as User);
     const [user, setUser] = useState<User>({} as User);
-    const {theme} = useContext(ThemeContext);
     // Retrieving the id of the user from the url parameter
-    const { id } = useParams()
+    const {id} = useParams()
     const [isModalOpen, setIsModalOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -37,8 +34,7 @@ export default function UserInfo(props: { token: string; }) {
                     const userResponse = await fetchUserById(id || "")
                     setUser(userResponse)
                 }
-            }
-            catch(error) {
+            } catch (error) {
                 console.error("Failed to fetch user:", error);
             }
         }
@@ -50,13 +46,18 @@ export default function UserInfo(props: { token: string; }) {
 
     // All the favicons shown in the contact section of the user profile
     const contacts = [
-        {id:1, favicon: 'https://cdn3.iconfinder.com/data/icons/social-messaging-ui-color-line/245532/72-512.png', alt:"email", name: user.email},
+        {
+            id: 1,
+            favicon: 'https://cdn3.iconfinder.com/data/icons/social-messaging-ui-color-line/245532/72-512.png',
+            alt: "email",
+            name: user.email
+        },
     ]
 
     // User contact information as html elements
     const contactElements = contacts.map(contact =>
         <div key={contact.id} className='profile-contact'>
-            <img src={contact.favicon} alt={contact.alt} />
+            <img src={contact.favicon} alt={contact.alt}/>
             <h3>{contact.name}</h3>
         </div>
     )
@@ -76,8 +77,7 @@ export default function UserInfo(props: { token: string; }) {
             console.log('User deleted');
             setIsModalOpen(false);  // Close the modal after confirmation
             navigate("/users")
-        }
-        catch (error : unknown) {
+        } catch (error: unknown) {
             console.log(error)
         }
     };
@@ -89,9 +89,8 @@ export default function UserInfo(props: { token: string; }) {
     const menuOptions = [
         {
             key: 1,
-            image: theme == "LIGHT" ? deleteLight : deleteDark,
-            alt: "Delete Question",
-            text: "Delete Question",
+            Icon: Trash,
+            text: "Delete User",
             onClick: handleDelete
         }
     ]
