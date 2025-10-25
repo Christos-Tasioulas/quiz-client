@@ -1,7 +1,7 @@
 import {type ChangeEvent, useContext, useEffect, useState} from "react";
 import type {User} from "../types/BasicTypes.tsx";
 import {ThemeContext} from "../context/ThemeContext.tsx";
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {fetchCurrentUser} from "../services/user-api.tsx";
 import {deleteQuestion, fetchQuestionById, updateQuestion} from "../services/questions-api.tsx";
 import deleteLight from "../assets/bin-shapes-and-symbols-svgrepo-com-light.svg";
@@ -13,6 +13,7 @@ import FormInputs from "../components/FormInputs.tsx";
 import EntityMenu from "../components/EntityMenu.tsx";
 import './QuestionInfo.css';
 import DynamicFormInputs from "../components/DynamicFormInputs.tsx";
+import ErrorMessage from "../components/ErrorMessage.tsx";
 
 export default function QuestionInfo(props: { token: string; }) {
 
@@ -26,6 +27,7 @@ export default function QuestionInfo(props: { token: string; }) {
     const [editedQuestion, setEditedQuestion] = useState("");
     const [editedAnswers, setEditedAnswers] = useState<string[]>([]);
     const navigate = useNavigate();
+    const [message, setMessage] = useState("")
 
     useEffect(() => {
         if (!props.token) return;
@@ -58,7 +60,7 @@ export default function QuestionInfo(props: { token: string; }) {
 
         getQuestionById();
 
-    }, [currentUser, currentUser.role, id])
+    }, [currentUser, currentUser.role, id, question])
 
     const questionInputs = [
         {
@@ -71,14 +73,16 @@ export default function QuestionInfo(props: { token: string; }) {
         }
     ];
 
-    const answerInputs = editedAnswers.map((a, i) => ({
-        id: i + 1,
-        type: "text",
-        placeholder: `Answer ${i + 1}`,
-        className: "profile-contact",
-        name: `answer-${i}`,
-        value: a,
-    }))
+    const answerInputs = editedAnswers
+        .filter(a => a !== null && a !== undefined)
+        .map((a, i) => ({
+            id: i + 1,
+            type: "text",
+            placeholder: `Answer ${i + 1}`,
+            className: "profile-contact",
+            name: `answer-${i}`,
+            value: a,
+        }))
 
 
     // User answer information as html elements
@@ -98,7 +102,7 @@ export default function QuestionInfo(props: { token: string; }) {
         const {name, value} = e.target;
         if (name === "question") {
             setEditedQuestion(value);
-        } else if (name.startsWith("answer-")) {
+        } else if (name.startsWith("answer-") || name.startsWith("field-")) {
             const index = parseInt(name.split("-")[1]);
             const updatedAnswers = [...editedAnswers];
             updatedAnswers[index] = value;
@@ -106,11 +110,28 @@ export default function QuestionInfo(props: { token: string; }) {
         }
     };
 
+    function validateForm(): string | null {
+        if (!editedQuestion.trim()) return "Please enter a question";
+
+        // Remove empty answers
+        const cleanedAnswers = editedAnswers.filter(a => a && a.trim() !== "");
+
+        if (cleanedAnswers.length < 2) return "You need at least 2 possible answers";
+
+        return null;
+    }
+
     const handleSave = async () => {
         try {
+            const errorMessage = validateForm();
+            if (errorMessage) {
+                setMessage(errorMessage);
+                return;
+            }
+            const filteredAnswers = editedAnswers.filter(a => a && a.trim() !== "");
             const updated = await updateQuestion(question.id!.toString(), {
                 question: editedQuestion,
-                answers: editedAnswers.map(answer => ({answer})),
+                answers: filteredAnswers.map(answer => ({answer})),
             });
             setQuestion(updated);
             setIsEditMode(false);
@@ -163,7 +184,11 @@ export default function QuestionInfo(props: { token: string; }) {
                     {/* Question display or edit form */}
                     <div className="userInfo">
                         {isEditMode ? (
-                            <>
+                            <form onSubmit={(e) => {
+                                e.preventDefault();
+                                handleSave();
+                            }}>
+                                <ErrorMessage message={message}/>
                                 <h1>Edit Question</h1>
                                 <FormInputs textInputs={questionInputs} handleChange={handleChange}/>
                                 <h2>Answers</h2>
@@ -174,10 +199,10 @@ export default function QuestionInfo(props: { token: string; }) {
                                     textInputClassName={"profile-contact"}
                                 />
                                 <div className='form-footer'>
-                                    <button onClick={handleSave}>Save</button>
+                                    <button type="submit">Save</button>
                                     <button onClick={() => setIsEditMode(false)}>Cancel</button>
                                 </div>
-                            </>
+                            </form>
                         ) : (
                             <>
                                 <h2 className="fullname">{question.question}</h2>
@@ -185,6 +210,9 @@ export default function QuestionInfo(props: { token: string; }) {
                                     <h2 className="contacts-title">Answers:</h2>
                                     {answerElements}
                                 </div>
+                                <Link to="/questions">
+                                    Go Back
+                                </Link>
                             </>
                         )}
                     </div>

@@ -5,3 +5,9 @@
 .contact {
     padding-bottom: 20vh;
 }
+
+.admin-navbar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}

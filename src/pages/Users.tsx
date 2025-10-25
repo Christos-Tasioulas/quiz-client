@@ -47,7 +47,7 @@ export default function Users(props: { token: string; }) {
     )
 
     return(
-        <div className='users'>
+        <div className='entities'>
             <h1>User Info</h1>
             <br/>
             <div className='scroll-container'>

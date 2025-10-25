@@ -6,6 +6,7 @@ import {createUser} from "../services/auth-api.tsx";
 import type {SignupFormData} from "../types/SignupFormData.tsx";
 import {authService} from "../services/auth-service.tsx";
 import './Signup.css';
+import ErrorMessage from "../components/ErrorMessage.tsx";
 
 export default function Signup() {
 
@@ -108,7 +109,7 @@ export default function Signup() {
         <main className="signup-form-container">
             {!isRegistered && !isLoading && <form className="signup-form" onSubmit={handleSubmit}>
                 {/* Any error will be printed to the user here */}
-                {message !== "" && <h3 className="signup-form-message">{message}</h3>}
+                <ErrorMessage message={message}/>
                 <h1>Let's Get You Started!</h1>
                 <br />
                 <FormInputs textInputs={textInputs} handleChange={handleChange} />

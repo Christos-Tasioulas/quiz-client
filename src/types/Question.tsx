@@ -15,3 +15,8 @@ export interface QuestionRequest {
     question: string;
     answers: Answer[];
 }
+
+export interface QuestionFormData {
+    question: string;
+    answers: string[];
+}

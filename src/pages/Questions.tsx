@@ -36,6 +36,11 @@ export default function Questions(props: { token: string; }) {
         navigate(`/questioninfo/${id}`)
     }
 
+    async function addQuestion(_event: React.MouseEvent<HTMLButtonElement>) {
+        _event.preventDefault()
+        navigate(`/addquestion`)
+    }
+
     // This is every user row in the admin table
     const questionElements = questions.map((question) =>
         (<tr onClick={event => handleClick(event, question)} key={question.id} className='user-table-row'>
@@ -44,7 +49,7 @@ export default function Questions(props: { token: string; }) {
     )
 
     return(
-        <div className='users'>
+        <div className='entities'>
             <h1>Questions</h1>
             <br/>
             <div className='scroll-container'>
@@ -53,13 +58,13 @@ export default function Questions(props: { token: string; }) {
                     <tr>
                         <th>Question</th>
                     </tr>
-                    {/*TODO: Implement Add Question Function*/}
                     </thead>
                     <tbody className='scroll-body'>
                     {questionElements}
                     </tbody>
                 </table>
             </div>
+            <button onClick={addQuestion}>Add Question</button>
         </div>
     )
 }

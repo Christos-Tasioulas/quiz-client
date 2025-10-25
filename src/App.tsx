@@ -1,6 +1,6 @@
 import './App.css'
 import Header from './components/Header';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {Routes, Route, BrowserRouter} from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -18,6 +18,7 @@ import {fetchCurrentUser} from "./services/user-api.tsx";
 import type {User} from "./types/BasicTypes.tsx";
 import Questions from "./pages/Questions.tsx";
 import QuestionInfo from "./pages/QuestionInfo.tsx";
+import AddQuestion from "./pages/AddQuestion.tsx";
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
         setToken(storedToken);
     }, []);
 
+    // fetch current user whenever token changes
     useEffect(() => {
         if (!token) return;
 
@@ -36,13 +38,14 @@ function App() {
             try {
                 const userResponse = await fetchCurrentUser();
                 setCurrentUser(userResponse);
-            } catch (error) {
-                console.error("Failed to fetch current user:", error);
+            } catch (err) {
+                console.error("Failed to fetch user:", err);
             }
         };
 
         getCurrentUser();
-    }, [token])
+    }, [token]);
+
 
     useEffect(() => {
         // Check if user and preferredTheme exist
@@ -69,17 +72,18 @@ function App() {
                 <div className="App-container">
                     <Routes>
                         <Route path="/" element={<Home token={token || ""}/>}/>
-                        <Route path="/about" element={<About />}/>
-                        <Route path="/contact" element={<Contact />}/>
-                        <Route path="/login" element={<Login />}/>
-                        <Route path="/signup" element={<Signup />}/>
+                        <Route path="/about" element={<About/>}/>
+                        <Route path="/contact" element={<Contact/>}/>
+                        <Route path="/login" element={<Login/>}/>
+                        <Route path="/signup" element={<Signup/>}/>
                         <Route path="/profile" element={<Profile token={token || ""}/>}/>
                         <Route path="/editprofile" element={<EditProfile token={token || ""}/>}/>
                         <Route path="/logout" element={<Logout />}/>
-                        <Route path="/users" element={<Users token={token || ""} />}/>
-                        <Route path="/userinfo/:id" element={<UserInfo token={token || ""} />}/>
+                        <Route path="/users" element={<Users token={token || ""}/>}/>
+                        <Route path="/userinfo/:id" element={<UserInfo token={token || ""}/>}/>
                         <Route path="/questions" element={<Questions token={token || ""}/>}/>
                         <Route path="/questioninfo/:id" element={<QuestionInfo token={token || ""}/>}/>
+                        <Route path="/addquestion" element={<AddQuestion token={token || ""}/>}/>
                     </Routes>
                 </div>
                 <Footer/>

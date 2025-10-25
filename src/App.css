@@ -76,5 +76,24 @@
   background-color: #cc8989;
 }
 
+.entities {
+  margin: 0 auto;
+  margin-top: 10%;
+  padding: 2rem;
+  max-width: 1000px;
+  background-color: var(--button-background-color);
+  border-radius: 1rem;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+}
 
+.entities h1 {
+  text-align: center;
+  color: var(--color-text);
+  margin-bottom: 1rem;
+}
+
+.entities button {
+  text-align: center;
+  margin: 1rem;
+}
 

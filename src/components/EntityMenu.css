@@ -1,6 +1,6 @@
 .menu-buttons {
     position: relative;
-    left: 150%;
+    left: 120%;
     display: flex;
     flex-direction: column; /* stack vertically */
     align-items: stretch; /* 👈 this makes children expand equally in width */
