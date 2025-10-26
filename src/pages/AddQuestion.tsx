@@ -97,7 +97,7 @@ export default function AddQuestion(props: { token: string }) {
                 question: formData.question,
                 answers: formData.answers
                     .filter(a => a && a.trim() !== "")
-                    .map(answer => ({ answer })),
+                    .map(answer => ({ answer, score:{"score": null} })),
             });
             navigate("/questions");
         } catch (err) {

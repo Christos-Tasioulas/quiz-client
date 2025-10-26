@@ -2,6 +2,7 @@
 export interface Answer {
     id?: number;
     answer: string;
+    score: object | null;
 }
 
 export interface Question {

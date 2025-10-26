@@ -127,7 +127,7 @@ export default function QuestionInfo(props: { token: string; }) {
             const filteredAnswers = editedAnswers.filter(a => a && a.trim() !== "");
             const updated = await updateQuestion(question.id!.toString(), {
                 question: editedQuestion,
-                answers: filteredAnswers.map(answer => ({answer})),
+                answers: filteredAnswers.map(answer => ({answer, score:{"score": null}})),
             });
             setQuestion(updated);
             setIsEditMode(false);
