@@ -1,8 +1,11 @@
 
+type Score = object | null
+// Should be adjusted according to the quiz's needs
+
 export interface Answer {
     id?: number;
     answer: string;
-    score: object | null;
+    score: Score;
 }
 
 export interface Question {
