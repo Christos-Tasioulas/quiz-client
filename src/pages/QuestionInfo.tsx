@@ -56,7 +56,7 @@ export default function QuestionInfo(props: { token: string; }) {
 
         getQuestionById();
 
-    }, [currentUser, currentUser.role, id, question])
+    }, [currentUser, currentUser.role, id, isEditMode])
 
     const questionInputs = [
         {
