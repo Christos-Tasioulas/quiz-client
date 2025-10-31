@@ -11,3 +11,15 @@
     flex-direction: column;
     gap: 1rem;
 }
+
+.user-navbar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.user-navbar button {
+    height: 10%;
+    width: 20%;
+}

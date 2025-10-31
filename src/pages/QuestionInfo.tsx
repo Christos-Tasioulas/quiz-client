@@ -4,7 +4,7 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import {fetchCurrentUser} from "../services/user-api.tsx";
 import {deleteQuestion, fetchQuestionById, updateQuestion} from "../services/questions-api.tsx";
 import Modal from "../components/Modal.tsx";
-import type {Question} from "../types/Question.tsx";
+import type {Answer, Question} from "../types/Question.tsx";
 import FormInputs from "../components/FormInputs.tsx";
 import EntityMenu from "../components/EntityMenu.tsx";
 import './QuestionInfo.css';
@@ -48,7 +48,7 @@ export default function QuestionInfo(props: { token: string; }) {
             try {
                 const questionResponse = await fetchQuestionById(id)
                 setQuestion(questionResponse)
-                setAnswers(questionResponse.answers)
+                setAnswers(questionResponse.answers.map((answer: Answer) => answer.answer))
             } catch (error) {
                 console.error("Failed to fetch question:", error);
             }
@@ -90,7 +90,7 @@ export default function QuestionInfo(props: { token: string; }) {
 
     const handleEditClick = () => {
         setEditedQuestion(question.question);
-        setEditedAnswers(question.answers || []);
+        setEditedAnswers(question.answers.map((answer) => answer.answer) || []);
         setIsEditMode(true);
     };
 

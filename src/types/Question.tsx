@@ -11,7 +11,7 @@ export interface Answer {
 export interface Question {
     id?: number;
     question: string;
-    answers: string[];
+    answers: Answer[];
 }
 
 export interface QuestionRequest {
