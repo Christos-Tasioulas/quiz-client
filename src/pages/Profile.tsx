@@ -57,7 +57,9 @@ export default function Profile(props: { token: string; }) {
                         <h2 className='fullname'>{currentUser.firstName} {currentUser.lastName}</h2>
                         <h2 className='-username'>{currentUser.username}</h2>
                         <h3 className='role'>{currentUser.role}</h3>
-                        <br/><br/><br/>
+                        <div>
+                            <Link to="/runs/list">View Runs</Link>
+                        </div>
                         {/* Contact Section in the profile page */}
                         <div className='contacts'>
                             <h2 className='contacts-title'>Contact:</h2>
