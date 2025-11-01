@@ -21,6 +21,7 @@ import QuestionInfo from "./pages/QuestionInfo.tsx";
 import AddQuestion from "./pages/AddQuestion.tsx";
 import Run from "./pages/Run.tsx";
 import Runs from "./pages/Runs.tsx";
+import RunInfo from "./pages/RunInfo.tsx";
 
 function App() {
 
@@ -88,6 +89,7 @@ function App() {
                         <Route path="/addquestion" element={<AddQuestion token={token || ""}/>}/>
                         <Route path="/runs/:id" element={<Run token={token || ""}/>}/>
                         <Route path="/runs/list" element={<Runs token={token || ""} />}/>
+                        <Route path="/runinfo/:id" element={<RunInfo token={token || ""}/>}/>
                     </Routes>
                 </div>
                 <Footer/>

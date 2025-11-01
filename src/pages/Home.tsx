@@ -73,6 +73,7 @@ export default function Home(props: { token: unknown; }) {
                 {currentUser.role == "ADMIN" && <div className="admin-navbar">
                     <Link to="/users">View all users</Link>
                     <Link to="/questions">View all questions</Link>
+                    <Link to="/runs/list">View all runs</Link>
                 </div>}
                 {currentUser.role == "USER" && <div className="user-navbar">
                     {error && <ErrorMessage message={error} />}

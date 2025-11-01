@@ -9,6 +9,7 @@ import {Mail, Pencil} from "lucide-react";
 export default function Profile(props: { token: string; }) {
 
     const [currentUser, setCurrentUser] = useState<User>({} as User);
+    const [isAdmin, setIsAdmin] = useState<boolean>(false)
 
     useEffect(() => {
         if (!props.token) return;
@@ -17,6 +18,7 @@ export default function Profile(props: { token: string; }) {
             try {
                 const userResponse = await fetchCurrentUser();
                 setCurrentUser(userResponse);
+                setIsAdmin(userResponse.role === "ADMIN")
             } catch (error) {
                 console.error("Failed to fetch current user:", error);
             }
@@ -57,9 +59,9 @@ export default function Profile(props: { token: string; }) {
                         <h2 className='fullname'>{currentUser.firstName} {currentUser.lastName}</h2>
                         <h2 className='-username'>{currentUser.username}</h2>
                         <h3 className='role'>{currentUser.role}</h3>
-                        <div>
+                        {!isAdmin && <div className='runs'>
                             <Link to="/runs/list">View Runs</Link>
-                        </div>
+                        </div>}
                         {/* Contact Section in the profile page */}
                         <div className='contacts'>
                             <h2 className='contacts-title'>Contact:</h2>

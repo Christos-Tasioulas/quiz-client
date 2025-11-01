@@ -18,7 +18,7 @@ export interface QuestionAnsweredRequest {
 
 export interface Run {
     id?: number;
-    userId: number;
+    score: object;
     username: string;
     questions: QuestionAnswered[];
     totalQuestions: number;

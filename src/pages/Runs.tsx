@@ -1,14 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {fetchCurrentUser} from "../services/user-api.tsx";
-import type {User} from "../types/BasicTypes.tsx";
 import type {Run} from "../types/Run.tsx";
 import {fetchAllRuns, fetchRunsByUserId} from "../services/run-api.tsx";
 import {useNavigate} from "react-router-dom";
 import {formatLocalDateTime} from "../utils/dateUtils.ts.tsx";
 
 export default function Runs(props: {token: string}) {
-    
-    const [currentUser, setCurrentUser] = useState<User>({} as User)
+
     const [isAdmin, setIsAdmin] = useState<boolean>()
     const [runs, setRuns] = useState<Run[]>([])
     const navigate = useNavigate();
@@ -19,7 +17,6 @@ export default function Runs(props: {token: string}) {
         const fetchData = async () => {
             try {
                 const userResponse = await fetchCurrentUser();
-                setCurrentUser(userResponse);
                 const isAdmin : boolean = userResponse.role === "ADMIN";
                 setIsAdmin(isAdmin)
 
@@ -35,10 +32,8 @@ export default function Runs(props: {token: string}) {
                 console.error("Failed to fetch question data:", error);
             }
         };
-
         fetchData();
-        console.log(currentUser)
-    }, [currentUser, props.token]);
+    }, [props.token]);
 
     // Navigating the admin to each individual user's info page
     async function handleClick(_event: React.MouseEvent<HTMLTableRowElement>, run: Run) {
@@ -50,8 +45,9 @@ export default function Runs(props: {token: string}) {
     // This is every user row in the admin table
     const runElements = runs.map((run) =>
         (<tr onClick={event => handleClick(event, run)} key={run.id} className='user-table-row'>
+            <td>{run.score.toString()}</td> {/* Should be adjusted according to the app's needs */}
             <td>{run.questionsAnswered}</td>
-            {isAdmin && run.username}
+            {isAdmin && <td>{run.username}</td>}
             <td>{formatLocalDateTime(run.startedAt)}</td>
             <td>{run.finishedAt ? formatLocalDateTime(run.finishedAt) : "Currently playing"}</td>
         </tr>)
@@ -59,12 +55,13 @@ export default function Runs(props: {token: string}) {
 
     return (
         <div className='entities'>
-            <h1>Runs</h1>
+            <h1>{!isAdmin && "User "}Runs</h1>
             <br/>
             <div className='scroll-container'>
                 <table className='scroll'>
                     <thead>
                     <tr>
+                        <th>Score</th>
                         <th>Questions Answered</th>
                         {isAdmin && <th>User</th>}
                         <th>Started At</th>
