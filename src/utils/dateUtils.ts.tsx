@@ -6,7 +6,9 @@ export function formatLocalDateTime(isoString: string): string {
 
     if (isNaN(date.getTime())) return "Invalid date";
 
-    return date.toLocaleString("gr-GR", {
+    const locale = import.meta.env.VITE_DEFAULT_LOCALE
+
+    return date.toLocaleString(locale, {
         year: "numeric",
         month: "short",
         day: "2-digit",
