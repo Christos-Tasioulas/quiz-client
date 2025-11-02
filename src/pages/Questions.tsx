@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from "react";
 import type {Question} from "../types/Question.tsx";
 import {useNavigate} from "react-router-dom";
-import type {User} from "../types/BasicTypes.tsx";
+import type {Column, User} from "../types/BasicTypes.tsx";
 import {fetchCurrentUser} from "../services/user-api.tsx";
 import {fetchQuestions} from "../services/questions-api.tsx";
+import Table from "../components/Table.tsx";
 
 export default function Questions(props: { token: string; }) {
     const [questions, setQuestions] = useState<Question[]>([])
@@ -41,29 +42,19 @@ export default function Questions(props: { token: string; }) {
         navigate(`/addquestion`)
     }
 
-    // This is every user row in the admin table
-    const questionElements = questions.map((question) =>
-        (<tr onClick={event => handleClick(event, question)} key={question.id} className='user-table-row'>
-            <td>{question.question}</td>
-        </tr>)
-    )
+    const tableColumns: Column<Question>[] = [
+        { key: "question", label: "Question", sortable: true },
+    ]
 
     return(
         <div className='entities'>
             <h1>Questions</h1>
             <br/>
-            <div className='scroll-container'>
-                <table className='scroll'>
-                    <thead>
-                    <tr>
-                        <th>Question</th>
-                    </tr>
-                    </thead>
-                    <tbody className='scroll-body'>
-                    {questionElements}
-                    </tbody>
-                </table>
-            </div>
+            <Table
+                data={questions}
+                columns={tableColumns}
+                onRowClick={(e, question: Question) => handleClick(e, question)}
+            />
             <button onClick={addQuestion}>Add Question</button>
         </div>
     )

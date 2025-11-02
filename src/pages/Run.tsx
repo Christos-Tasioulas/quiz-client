@@ -60,14 +60,44 @@ export default function Run(props: {token: string}) {
     }
 
     const handleAnswer = async (updated: QuestionAnsweredRequest) => {
+        // ✅ Optimistic UI update
+        setRun(prevRun => {
+            if (!prevRun) return prevRun;
+
+            const updatedQuestions = prevRun.questions.map(q =>
+                q.questionId === updated.questionId
+                    ? { ...q, answerId: updated.answerId, questionAnswered: true }
+                    : q
+            );
+
+            // Optionally update progress locally
+            const answeredCount = updatedQuestions.filter(q => q.questionAnswered).length;
+            const newProgress = Math.round((answeredCount / prevRun.totalQuestions) * 100);
+
+            return { ...prevRun, questions: updatedQuestions, progress: newProgress };
+        });
+
         try {
-            const updatedRun = await updateProgress(updated.runId.toString())
-            setRun(updatedRun)
+            await updateProgress(updated.runId.toString());
+            // 🔹 No need to setRun again — UI is already in sync.
         } catch (error) {
-            setError(`Could not save and load run`)
-            console.error(error)
+            console.error("Failed to update progress:", error);
+            setError("Could not save and load run");
+
+            // ❌ Revert optimistic update if API failed
+            setRun(prevRun => {
+                if (!prevRun) return prevRun;
+                const revertedQuestions = prevRun.questions.map(q =>
+                    q.questionId === updated.questionId
+                        ? { ...q, answerId: undefined, questionAnswered: false }
+                        : q
+                );
+                return { ...prevRun, questions: revertedQuestions };
+            });
         }
     };
+
+
 
     const handleEndRun = async () => {
         try {
@@ -81,18 +111,18 @@ export default function Run(props: {token: string}) {
     }
 
     return (
-        <div className="run-container">
-            <h1 className="text-xl font-semibold mb-2">
+        <div className="run-container index-${currentIndex}">
+            <h1 className="run-title">
                 Run #{run.id} — {run.totalQuestions} Questions
             </h1>
-            <div className="space-y-4">
+            <div className="run-question-container">
                 <Question question={run.questions[currentIndex]} onAnswered={handleAnswer}/>
             </div>
-            <div className="flex justify-between mt-6">
+            <div className="run-buttons">
                 <button
                     disabled={currentIndex === 0}
                     onClick={() => setCurrentIndex((i) => i - 1)}
-                    className="px-4 py-2 rounded bg-gray-200 disabled:opacity-50"
+                    className="run-button"
                 >
                     Previous
                 </button>
@@ -100,21 +130,21 @@ export default function Run(props: {token: string}) {
                 {currentIndex < run.questions.length - 1 ? (
                     <button
                         onClick={() => setCurrentIndex((i) => i + 1)}
-                        className="px-4 py-2 rounded bg-blue-500 text-white"
+                        className="run-button"
                     >
                         Next
                     </button>
                 ) : (
                     <button
                         onClick={handleEndRun} // define this to finish the run
-                        className="px-4 py-2 rounded bg-red-500 text-white"
+                        className="run-button"
                     >
                         End
                     </button>
                 )}
             </div>
 
-            <div className="mt-6 text-right text-sm text-gray-500">
+            <div className="run-progress">
                 Questions answered: {run.progress} %
             </div>
         </div>

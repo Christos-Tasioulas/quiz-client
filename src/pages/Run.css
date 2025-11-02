@@ -1,5 +1,77 @@
+/* -------------------------------------------
+   RUN PAGE STYLES (index-based)
+-------------------------------------------- */
 .run-container {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    border-radius: 1rem;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.run-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+}
+
+.run-question-container {
+    width: 100%;
+    max-width: 800px;
+    background-color: var(--button-background-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.4s ease, transform 0.3s ease;
+}
+
+.run-question-container:hover {
+    transform: translateY(-2px);
+}
+
+.run-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.run-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.run-progress {
+    font-size: 1.1rem;
+    color: var(--color-text-less-saturated);
+}
+
+/* -------------------------------------------
+   INDEX-BASED THEMING / VISUAL FEEDBACK
+-------------------------------------------- */
+.run-container.index-0 {
+    background-color: rgba(100, 108, 255, 0.1);
+}
+
+.run-container.index-1 {
+    background-color: rgba(188, 139, 255, 0.1);
+}
+
+.run-container.index-2 {
+    background-color: rgba(255, 180, 80, 0.1);
+}
+
+.run-container.index-3 {
+    background-color: rgba(100, 255, 180, 0.1);
+}
+
+.run-container.index-4 {
+    background-color: rgba(255, 100, 150, 0.1);
+}
+
+/* Loop-like fallback if there are many questions */
+.run-container[class*="index-"]:not(.index-0):not(.index-1):not(.index-2):not(.index-3):not(.index-4) {
+    background-color: rgba(200, 200, 200, 0.05);
 }

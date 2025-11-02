@@ -4,7 +4,7 @@ export interface QuestionAnswered {
     runId: number;
     questionId: number;
     questionText: string;
-    answerId: number;
+    answerId?: number;
     answerText: string;
     questionAnswered: boolean;
 }

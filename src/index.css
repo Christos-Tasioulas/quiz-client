@@ -97,3 +97,12 @@ body.DARK {
   }
 }
 
+th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+th.sortable:hover {
+  background-color: var(--secondary-background);
+}
+

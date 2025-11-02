@@ -38,7 +38,7 @@ export default function Question({ question, onAnswered }: QuestionProps) {
     // ⏳ Show loader while fetching
     if (!currentQuestion && !error) {
         return (
-            <div className="p-4 border rounded-2xl shadow-sm text-center text-gray-500 italic">
+            <div className="question-loading">
                 Loading question...
             </div>
         );
@@ -86,9 +86,9 @@ export default function Question({ question, onAnswered }: QuestionProps) {
         return (
             <label
                 key={answer.id ?? index}
-                className={`flex items-center p-3 border rounded-lg cursor-pointer transition-all
-          ${isSelected ? "bg-blue-100 border-blue-500" : "hover:bg-gray-100"}
-          ${isAnswered ? "cursor-not-allowed opacity-70" : ""}
+                className={`answer
+          ${isSelected ? "-selected" : "-not-selected"}
+          ${isAnswered ? "-answered" : ""}
         `}
             >
                 <input
@@ -98,7 +98,7 @@ export default function Question({ question, onAnswered }: QuestionProps) {
                     checked={isSelected}
                     disabled={isSubmitting}
                     onChange={() => handleSelectAnswer(answer.id)}
-                    className="mr-3"
+                    className="answer-radio"
                 />
                 <span>{answer.answer}</span>
             </label>
@@ -106,8 +106,8 @@ export default function Question({ question, onAnswered }: QuestionProps) {
     });
 
     return (
-        <div className="p-4 border rounded-2xl shadow-sm hover:shadow-md transition-all">
-            <h2 className="font-semibold text-lg mb-2">
+        <div className="question-container">
+            <h2 className="question">
                 {question.questionText}
             </h2>
 

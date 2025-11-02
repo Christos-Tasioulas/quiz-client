@@ -4,6 +4,8 @@ import type {Run} from "../types/Run.tsx";
 import {fetchAllRuns, fetchRunsByUserId} from "../services/run-api.tsx";
 import {useNavigate} from "react-router-dom";
 import {formatLocalDateTime} from "../utils/dateUtils.ts.tsx";
+import Table from "../components/Table.tsx";
+import type {Column} from "../types/BasicTypes.tsx";
 
 export default function Runs(props: {token: string}) {
 
@@ -42,37 +44,23 @@ export default function Runs(props: {token: string}) {
         navigate(`/runinfo/${id}`)
     }
 
-    // This is every user row in the admin table
-    const runElements = runs.map((run) =>
-        (<tr onClick={event => handleClick(event, run)} key={run.id} className='user-table-row'>
-            <td>{run.score.toString()}</td> {/* Should be adjusted according to the app's needs */}
-            <td>{run.questionsAnswered}</td>
-            {isAdmin && <td>{run.username}</td>}
-            <td>{formatLocalDateTime(run.startedAt)}</td>
-            <td>{run.finishedAt ? formatLocalDateTime(run.finishedAt) : "Currently playing"}</td>
-        </tr>)
-    )
+    const tableColumns: Column<Run>[] = [
+        { key: "score", label: "Score", sortable: true, format: v => (v ? v.toString() : "-") },
+        { key: "questionsAnswered", label: "Answered", sortable: true},
+        { key: "username", label: "User", sortable: true },
+        { key: "startedAt", label: "Started At", sortable: true, format: v => formatLocalDateTime(v as string) },
+        { key: "finishedAt", label: "Finished At", sortable: true, format: v => v ? formatLocalDateTime(v as string) : "Currently playing" },
+    ]
 
     return (
         <div className='entities'>
             <h1>{!isAdmin && "User "}Runs</h1>
             <br/>
-            <div className='scroll-container'>
-                <table className='scroll'>
-                    <thead>
-                    <tr>
-                        <th>Score</th>
-                        <th>Questions Answered</th>
-                        {isAdmin && <th>User</th>}
-                        <th>Started At</th>
-                        <th>Finished At</th>
-                    </tr>
-                    </thead>
-                    <tbody className='scroll-body'>
-                    {runElements}
-                    </tbody>
-                </table>
-            </div>
+            <Table
+                data={runs}
+                columns={tableColumns}
+                onRowClick={(e, run: Run) => handleClick(e, run)}
+            />
         </div>
     )
 }

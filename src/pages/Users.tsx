@@ -1,8 +1,9 @@
 import {useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import {fetchCurrentUser, fetchUsers} from "../services/user-api.tsx";
-import type {User} from "../types/BasicTypes.tsx";
+import type {Column, User} from "../types/BasicTypes.tsx";
 import './Users.css'
+import Table from "../components/Table.tsx";
 
 export default function Users(props: { token: string; }) {
 
@@ -37,33 +38,26 @@ export default function Users(props: { token: string; }) {
         navigate(`/userinfo/${id}`)
     }
 
-    // This is every user row in the admin table
-    const userElements = users.map((user) =>
-        (<tr onClick={event => handleClick(event, user)} key={user.id} className='user-table-row'>
-            <td>{user.username}</td>
-            <td>{user.firstName} {user.lastName}</td>
-            <td>{user.email}</td>
-        </tr>)
-    )
+    const tableColumns: Column<User>[] = [
+        {key: "username", label: "Username", sortable: true},
+        {
+            label: "Fullname",
+            sortable: true,
+            render: (user) => `${user.firstName} ${user.lastName}`,
+            sortValue: (user) => `${user.firstName} ${user.lastName}`.toLowerCase(), // 👈 custom sort
+        },
+        {key: "email", label: "E-mail", sortable: true}
+    ]
 
-    return(
+    return (
         <div className='entities'>
             <h1>User Info</h1>
             <br/>
-            <div className='scroll-container'>
-                <table className='scroll'>
-                    <thead>
-                    <tr>
-                        <th>Username</th>
-                        <th>Fullname</th>
-                        <th>Email</th>
-                    </tr>
-                    </thead>
-                    <tbody className='scroll-body'>
-                    {userElements}
-                    </tbody>
-                </table>
-            </div>
+            <Table
+                data={users}
+                columns={tableColumns}
+                onRowClick={(event, user) => handleClick(event, user)}
+            />
         </div>
     )
 }
