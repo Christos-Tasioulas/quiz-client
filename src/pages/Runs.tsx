@@ -44,13 +44,21 @@ export default function Runs(props: {token: string}) {
         navigate(`/runinfo/${id}`)
     }
 
-    const tableColumns: Column<Run>[] = [
+    const baseColumns: Column<Run>[] = [
         { key: "score", label: "Score", sortable: true, format: v => (v ? v.toString() : "-") },
-        { key: "questionsAnswered", label: "Answered", sortable: true},
-        { key: "username", label: "User", sortable: true },
+        { key: "questionsAnswered", label: "Answered", sortable: true },
         { key: "startedAt", label: "Started At", sortable: true, format: v => formatLocalDateTime(v as string) },
         { key: "finishedAt", label: "Finished At", sortable: true, format: v => v ? formatLocalDateTime(v as string) : "Currently playing" },
-    ]
+    ];
+
+    const tableColumns: Column<Run>[] = isAdmin
+        ? [
+            ...baseColumns.slice(0, 2), // Insert before "Started At"
+            { key: "username", label: "User", sortable: true },
+            ...baseColumns.slice(2),
+        ]
+        : baseColumns;
+
 
     return (
         <div className='entities'>
