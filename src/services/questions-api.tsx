@@ -13,7 +13,7 @@ export const fetchQuestions = async () => {
 }
 
 export const fetchQuestionsByQuiz = async (id: string) => {
-    const response = await api.get(`/questions/questionsByQuiz/${id}`);
+    const response = await api.get(`/questions/by-quiz/${id}`);
     return response.data;
 }
 
@@ -23,7 +23,7 @@ export const fetchQuestionById = async (id: string) => {
 }
 
 export const fetchRandomQuestionByQuizId = async (quizId: string) => {
-    const response = await api.get(`/questions/randomQuestion/${quizId}`);
+    const response = await api.get(`/questions/random/${quizId}`);
     return response.data;
 }
 

@@ -9,7 +9,11 @@ export interface Quiz {
     numberOfQuestions: number;
 }
 
-export interface QuizRequest {
+export interface QuizRequestWithQuestions {
     name: string;
     questions: Question[];
+}
+
+export interface QuizRequest {
+    name: string;
 }

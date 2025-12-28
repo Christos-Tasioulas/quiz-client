@@ -17,7 +17,6 @@ export interface Question {
 
 export interface QuestionRequest {
     id?: number;
-    quizId: number;
     question: string;
     answers: Answer[];
 }
