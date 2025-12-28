@@ -10,12 +10,14 @@ export interface Answer {
 
 export interface Question {
     id?: number;
+    quizId?: number;
     question: string;
     answers: Answer[];
 }
 
 export interface QuestionRequest {
     id?: number;
+    quizId: number;
     question: string;
     answers: Answer[];
 }

@@ -12,13 +12,18 @@ export const fetchQuestions = async () => {
     return response.data;
 }
 
+export const fetchQuestionsByQuiz = async (id: string) => {
+    const response = await api.get(`/questions/questionsByQuiz/${id}`);
+    return response.data;
+}
+
 export const fetchQuestionById = async (id: string) => {
     const response = await api.get(`/questions/questionById/${id}`);
     return response.data;
 }
 
-export const fetchRandomQuestion = async () => {
-    const response = await api.get('/questions/randomQuestion');
+export const fetchRandomQuestionByQuizId = async (quizId: string) => {
+    const response = await api.get(`/questions/randomQuestion/${quizId}`);
     return response.data;
 }
 

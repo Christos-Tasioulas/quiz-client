@@ -30,6 +30,7 @@ export interface Run {
 
 export interface RunRequest {
     userId?: number;
+    quizId?: number;
     score: object;
     totalQuestions: number;
     questionsAnswered: number;

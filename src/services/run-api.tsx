@@ -23,6 +23,11 @@ export const fetchRunsByUserId = async (id: string | undefined) => {
     return response.data;
 };
 
+export const fetchRunsByQuiz = async (id: string) => {
+    const response = await api.get(`/runs/getRunsByQuiz/${id}`);
+    return response.data;
+}
+
 export const updateProgress = async (id: string | undefined) => {
     const response = await api.put(`/runs/updateProgress/${id}`);
     return response.data;
