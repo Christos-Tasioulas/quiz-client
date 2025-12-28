@@ -6,6 +6,11 @@ export const createQuiz = async (quizData: QuizRequest) => {
     return response.data;
 }
 
+export const fetchAllQuizzes = async () => {
+    const response = await api.get('/quizzes');
+    return response.data;
+}
+
 export const fetchQuizById = async (id: string) => {
     const response = await api.get(`/quizzes/getQuizById/${id}`);
     return response.data;

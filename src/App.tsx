@@ -22,6 +22,9 @@ import AddQuestion from "./pages/AddQuestion.tsx";
 import Run from "./pages/Run.tsx";
 import Runs from "./pages/Runs.tsx";
 import RunInfo from "./pages/RunInfo.tsx";
+import Quizzes from "./pages/Quizzes.tsx";
+import QuizInfo from "./pages/QuizInfo.tsx";
+import AddQuiz from "./pages/AddQuiz.tsx";
 
 function App() {
 
@@ -90,6 +93,9 @@ function App() {
                         <Route path="/runs/:id" element={<Run token={token || ""}/>}/>
                         <Route path="/runs/list" element={<Runs token={token || ""} />}/>
                         <Route path="/runinfo/:id" element={<RunInfo token={token || ""}/>}/>
+                        <Route path="/quizzes" element={<Quizzes token={token || ""}/>}/>
+                        <Route path="/quizinfo/:id" element={<QuizInfo token={token || ""}/>}/>
+                        <Route path="/addquiz" element={<AddQuiz token={token || ""}/>}/>
                     </Routes>
                 </div>
                 <Footer/>
