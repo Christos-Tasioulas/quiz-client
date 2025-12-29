@@ -1,5 +1,5 @@
 
-type Score = object | null
+export type Score = object | null
 // Should be adjusted according to the quiz's needs
 
 export interface Answer {

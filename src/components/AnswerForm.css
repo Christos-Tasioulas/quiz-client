@@ -1,0 +1,9 @@
+.answer-form {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.answer-form button {
+
+}
