@@ -9,6 +9,9 @@ export const createQuestion = async (questionData: QuestionRequest) => {
 
 export const fetchQuestions = async () => {
     const response = await api.get('/questions');
+    if (response.status === 204) {
+        return []; // 👈 normalize empty response
+    }
     return response.data;
 }
 

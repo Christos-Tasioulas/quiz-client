@@ -7,7 +7,7 @@ import Modal from "../components/Modal.tsx";
 import type {Answer, Question} from "../types/Question.tsx";
 import FormInputs from "../components/FormInputs.tsx";
 import EntityMenu from "../components/EntityMenu.tsx";
-import './QuestionInfo.css';
+import './QuizInfo.css';
 import DynamicFormInputs from "../components/DynamicFormInputs.tsx";
 import ErrorMessage from "../components/ErrorMessage.tsx";
 import {Pencil, Trash} from "lucide-react";

@@ -32,6 +32,11 @@ export default function QuestionForm({
             </div>
 
             <input
+                type="hidden"
+                {...register(`questions.${qIndex}.id`)} // <-- hidden ID
+            />
+
+            <input
                 className='signup-form-input'
                 placeholder="Question text"
                 {...register(`questions.${qIndex}.question`)}
@@ -42,7 +47,7 @@ export default function QuestionForm({
 
             {answerFields.map((answer, aIndex) => (
                 <AnswerForm
-                    key={answer.id}
+                    key={answer.id ?? `a-${qIndex}-${aIndex}`}
                     qIndex={qIndex}
                     aIndex={aIndex}
                     register={register}

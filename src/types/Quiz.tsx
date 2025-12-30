@@ -1,5 +1,5 @@
 import type {Run} from "./Run.tsx";
-import type {Question} from "./Question.tsx";
+import type {Question, QuestionRequest} from "./Question.tsx";
 
 export interface Quiz {
     id?: number;
@@ -11,7 +11,7 @@ export interface Quiz {
 
 export interface QuizRequestWithQuestions {
     name: string;
-    questions: Question[];
+    questions: QuestionRequest[];
 }
 
 export interface QuizRequest {

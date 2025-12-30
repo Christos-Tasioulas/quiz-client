@@ -10,6 +10,9 @@ export const createRun = async (runData: RunRequest) => {
 
 export const fetchAllRuns = async () => {
     const response = await api.get('/runs');
+    if (response.status === 204) {
+        return []; // 👈 normalize empty response
+    }
     return response.data;
 };
 

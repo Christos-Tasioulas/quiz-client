@@ -1,9 +1,14 @@
-import type {QuizRequest} from "../types/Quiz.tsx";
+import type {QuizRequest, QuizRequestWithQuestions} from "../types/Quiz.tsx";
 import api from "./axiosInstance.tsx";
 import type {QuestionRequest} from "../types/Question.tsx";
 
 export const createQuiz = async (quizData: QuizRequest) => {
     const response = await api.post('/quizzes', quizData);
+    return response.data;
+}
+
+export const createQuizWithQuestions = async (quizData: QuizRequestWithQuestions) => {
+    const response = await api.post('/quizzes/bulk', quizData);
     return response.data;
 }
 
@@ -14,6 +19,9 @@ export const addQuestionToQuiz = async (quizId: string, questionData: QuestionRe
 
 export const fetchAllQuizzes = async () => {
     const response = await api.get('/quizzes');
+    if (response.status === 204) {
+        return []; // 👈 normalize empty response
+    }
     return response.data;
 }
 
@@ -29,6 +37,11 @@ export const fetchQuizByName = async (name: string) => {
 
 export const updateQuiz = async (id: string | undefined, quizData: Partial<QuizRequest>) => {
     const response = await api.put(`/quizzes/${id}`, quizData);
+    return response.data;
+}
+
+export const updateQuizWithQuestions = async (id: string, quizData: Partial<QuizRequestWithQuestions>) => {
+    const response = await api.put(`/quizzes/bulk/${id}`, quizData);
     return response.data;
 }
 

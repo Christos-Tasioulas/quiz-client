@@ -28,6 +28,12 @@ export default function AnswerForm({
                 {...register(`questions.${qIndex}.answers.${aIndex}.answer`)}
             />
 
+            {/* Hidden input to preserve DB ID */}
+            <input
+                type="hidden"
+                {...register(`questions.${qIndex}.answers.${aIndex}.id`)}
+            />
+
             <button className="remove-button" type="button" disabled={disableRemove} onClick={removeAnswer}>
                 ❌
             </button>
@@ -38,3 +44,4 @@ export default function AnswerForm({
         </div>
     );
 }
+

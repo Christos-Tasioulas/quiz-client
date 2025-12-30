@@ -4,6 +4,9 @@ import type {User} from "../types/BasicTypes.tsx";
 // API Methods
 export const fetchUsers = async () => {
     const response = await api.get('/users');
+    if (response.status === 204) {
+        return []; // 👈 normalize empty response
+    }
     return response.data;
 };
 

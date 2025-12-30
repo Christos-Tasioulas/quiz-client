@@ -8,6 +8,11 @@ export interface Answer {
     score: Score;
 }
 
+export interface AnswerRequest {
+    answer: string;
+    score?: Score;
+}
+
 export interface Question {
     id?: number;
     quizId?: number;
@@ -16,9 +21,8 @@ export interface Question {
 }
 
 export interface QuestionRequest {
-    id?: number;
     question: string;
-    answers: Answer[];
+    answers: AnswerRequest[];
 }
 
 export interface QuestionFormData {
