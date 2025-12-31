@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useForm, useFieldArray, FormProvider } from "react-hook-form";
+import {useForm, useFieldArray, FormProvider, type SubmitHandler} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { quizSchema, type QuizFormValues } from "../types/quiz.schema";
 import { useNavigate } from "react-router-dom";
@@ -42,7 +42,7 @@ export default function AddQuiz({ token }: { token: string }) {
         });
     };
 
-    const onSubmit = async (data: QuizFormValues) => {
+    const onSubmit: SubmitHandler<QuizFormValues> = async (data) => {
         try {
             console.log(data);
             await createQuizWithQuestions(data);

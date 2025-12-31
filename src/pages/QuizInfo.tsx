@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
-import { useForm, useFieldArray, FormProvider } from "react-hook-form";
+import {useForm, useFieldArray, FormProvider, type SubmitHandler} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { quizSchema, type QuizFormValues } from "../types/quiz.schema";
 import { useNavigate, useParams, Link } from "react-router-dom";
@@ -115,14 +115,14 @@ export default function QuizInfo({ token }: { token: string }) {
     });
 
 
-    const onSubmit = async (data: QuizFormValues) => {
+    const onSubmit: SubmitHandler<QuizFormValues> = async (data) => {
         if (!id) return;
 
         const normalized = normalizeQuizPayload(data);
         console.log("Normalized payload:", normalized);
 
         try {
-            await updateQuizWithQuestions(id, normalized);
+            await updateQuizWithQuestions(id!, normalized);
             setIsEditMode(false);
         } catch (err) {
             console.error(err);

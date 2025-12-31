@@ -11,6 +11,7 @@ export default function QuizRuns(props: {token: string}) {
     const { id } = useParams<{ id: string }>();
     const [isAdmin, setIsAdmin] = useState<boolean>()
     const [runs, setRuns] = useState<Run[]>([])
+    const [quizName, setQuizname] = useState<string>("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -25,6 +26,7 @@ export default function QuizRuns(props: {token: string}) {
                 if(isAdmin) {
                     const runResponse = await fetchRunsByQuiz(id);
                     setRuns(runResponse)
+                    setQuizname(runResponse[0].quizName)
                 }
 
             } catch (error) {
@@ -33,6 +35,7 @@ export default function QuizRuns(props: {token: string}) {
         };
         fetchData();
     }, [props.token]);
+
 
     // Navigating the admin to each individual user's info page
     async function handleClick(_event: React.MouseEvent<HTMLTableRowElement>, run: Run) {
@@ -59,7 +62,7 @@ export default function QuizRuns(props: {token: string}) {
 
     return (
         <div className='entities'>
-            <h1>Runs of {runs[0].quizName}</h1>
+            <h1>Runs of {quizName}</h1>
             <br/>
             <Table
                 data={runs}
