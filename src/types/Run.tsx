@@ -20,6 +20,7 @@ export interface Run {
     id?: number;
     score: object;
     username: string;
+    quizName: string;
     questions: QuestionAnswered[];
     totalQuestions: number;
     questionsAnswered: number;

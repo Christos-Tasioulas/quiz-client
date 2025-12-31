@@ -82,7 +82,7 @@ export default function RunInfo(props: { token: string }) {
                     {/* Delete Profile Button */}
                     <EntityMenu menuOptions={menuOptions}/>
                     <div className="userInfo">
-                        {/* Important Run Info */}
+                        <h1>{run.quizName}</h1>
                         <h2 className='score'>Score: {run.score.toString()}</h2>
                         <h2 className='fullname'>{run.questionsAnswered} / {run.totalQuestions} answered</h2>
                         <h3 className='-username'>from {formatLocalDateTime(run.startedAt)} {run.finishedAt ? `to ${formatLocalDateTime(run.finishedAt)}` : "Currently Running"}</h3>

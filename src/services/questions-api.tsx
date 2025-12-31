@@ -21,7 +21,7 @@ export const fetchQuestionsByQuiz = async (id: string) => {
 }
 
 export const fetchQuestionById = async (id: string) => {
-    const response = await api.get(`/questions/questionById/${id}`);
+    const response = await api.get(`/questions/${id}`);
     return response.data;
 }
 

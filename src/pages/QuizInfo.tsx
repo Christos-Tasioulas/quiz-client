@@ -19,7 +19,7 @@ import ErrorMessage from "../components/ErrorMessage";
 import EntityMenu from "../components/EntityMenu";
 import Modal from "../components/Modal";
 
-import { Pencil, Trash } from "lucide-react";
+import {EyeIcon, Pencil, Trash} from "lucide-react";
 import { v4 as uuid } from "uuid";
 
 import "./QuizInfo.css";
@@ -144,8 +144,9 @@ export default function QuizInfo({ token }: { token: string }) {
 
     const menuOptions = useMemo(
         () => [
-            { key: 1, Icon: Pencil, text: "Edit Quiz", onClick: () => setIsEditMode(true) },
-            { key: 2, Icon: Trash, text: "Delete Quiz", onClick: () => setIsDeleteModalOpen(true) },
+            { key: 1, Icon: EyeIcon, text: "View runs", onClick: () => navigate(`/quiz/${id}/runs`) },
+            { key: 2, Icon: Pencil, text: "Edit Quiz", onClick: () => setIsEditMode(true) },
+            { key: 3, Icon: Trash, text: "Delete Quiz", onClick: () => setIsDeleteModalOpen(true) },
         ],
         []
     );

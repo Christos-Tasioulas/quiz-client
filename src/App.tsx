@@ -25,6 +25,8 @@ import RunInfo from "./pages/RunInfo.tsx";
 import Quizzes from "./pages/Quizzes.tsx";
 import QuizInfo from "./pages/QuizInfo.tsx";
 import AddQuiz from "./pages/AddQuiz.tsx";
+import SelectQuiz from "./pages/SelectQuiz.tsx";
+import QuizRuns from "./pages/QuizRuns.tsx";
 
 function App() {
 
@@ -96,6 +98,8 @@ function App() {
                         <Route path="/quizzes" element={<Quizzes token={token || ""}/>}/>
                         <Route path="/quizinfo/:id" element={<QuizInfo token={token || ""}/>}/>
                         <Route path="/addquiz" element={<AddQuiz token={token || ""}/>}/>
+                        <Route path="/selectquiz" element={<SelectQuiz token={token || ""}/>}/>
+                        <Route path="/quiz/:id/runs" element={<QuizRuns token={token || ""}/>}/>
                     </Routes>
                 </div>
                 <Footer/>

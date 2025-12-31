@@ -26,7 +26,7 @@ export const fetchRunsByUserId = async (id: string | undefined) => {
     return response.data;
 };
 
-export const fetchRunsByQuiz = async (id: string) => {
+export const fetchRunsByQuiz = async (id: string | undefined) => {
     const response = await api.get(`/runs/getRunsByQuiz/${id}`);
     return response.data;
 }

@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from "react";
-import {fetchCurrentUser} from "../services/user-api.tsx";
 import type {Run} from "../types/Run.tsx";
-import {fetchAllRuns, fetchRunsByUserId} from "../services/run-api.tsx";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
+import {fetchCurrentUser} from "../services/user-api.tsx";
+import { fetchRunsByQuiz, } from "../services/run-api.tsx";
+import type {Column} from "../types/BasicTypes.tsx";
 import {formatLocalDateTime} from "../utils/dateUtils.ts.tsx";
 import Table from "../components/Table.tsx";
-import type {Column} from "../types/BasicTypes.tsx";
 
-export default function Runs(props: {token: string}) {
-
+export default function QuizRuns(props: {token: string}) {
+    const { id } = useParams<{ id: string }>();
     const [isAdmin, setIsAdmin] = useState<boolean>()
     const [runs, setRuns] = useState<Run[]>([])
     const navigate = useNavigate();
@@ -20,18 +20,15 @@ export default function Runs(props: {token: string}) {
             try {
                 const userResponse = await fetchCurrentUser();
                 const isAdmin : boolean = userResponse.role === "ADMIN";
-                setIsAdmin(isAdmin)
+                setIsAdmin(isAdmin);
 
                 if(isAdmin) {
-                    const runResponse = await fetchAllRuns();
-                    setRuns(runResponse)
-                } else {
-                    const runResponse = await fetchRunsByUserId(userResponse.id)
+                    const runResponse = await fetchRunsByQuiz(id);
                     setRuns(runResponse)
                 }
 
             } catch (error) {
-                console.error("Failed to fetch question data:", error);
+                console.error("Failed to fetch runs :", error);
             }
         };
         fetchData();
@@ -45,7 +42,6 @@ export default function Runs(props: {token: string}) {
     }
 
     const baseColumns: Column<Run>[] = [
-        { key: "quizName", label: "Quiz", sortable: true },
         { key: "score", label: "Score", sortable: true, format: v => (v ? v.toString() : "-") },
         { key: "questionsAnswered", label: "Answered", sortable: true },
         { key: "startedAt", label: "Started At", sortable: true, format: v => formatLocalDateTime(v as string) },
@@ -63,7 +59,7 @@ export default function Runs(props: {token: string}) {
 
     return (
         <div className='entities'>
-            <h1>{!isAdmin && "User "}Runs</h1>
+            <h1>Runs of {runs[0].quizName}</h1>
             <br/>
             <Table
                 data={runs}

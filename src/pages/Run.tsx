@@ -113,7 +113,7 @@ export default function Run(props: {token: string}) {
     return (
         <div className="run-container index-${currentIndex}">
             <h1 className="run-title">
-                Run #{run.id} — {run.totalQuestions} Questions
+                {run.quizName}
             </h1>
             <div className="run-question-container">
                 <Question question={run.questions[currentIndex]} onAnswered={handleAnswer}/>
